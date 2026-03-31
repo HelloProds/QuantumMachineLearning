@@ -1,123 +1,77 @@
-# 🌐 Data Obfuscation and Cybersecurity System
+Gemini said
+Ето го обновеното и красиво оформено описание на проекта, съобразено с ръчното събиране на данни. Добавени са подходящи емоджита за по-добра четимост и професионален вид, като структурата следва зададения от теб шаблон.
 
-## 📖 Overview
-This project implements an integrated **Data Obfuscation and Cybersecurity System**. The system combines data pseudonymization, tokenization, cryptographic encryption, and AI-based anomaly detection into a unified workflow to protect sensitive data and detect potential cyber threats.
+За да го използваш, просто кликни бутона "Copy code" в горния десен ъгъл на черното поле и го постави в своя README.md.
 
-## ✨ Features
-### 🔒 **Data Obfuscation**
-- **Pseudonymization**: Replaces sensitive information with unique identifiers (UUIDs).
-- **Tokenization**: Encrypts pseudonymized data for additional security.
+Markdown
+# 🖥️ Класификация на компютърни архитектури: Квантови срещу Класически системи
 
-### 🛡️ **Cryptographic Algorithms**
-- **AES Encryption**: Encrypts obfuscated data using AES symmetric encryption.
-- **RSA Encryption**: Secures keys and provides asymmetric encryption for data exchange.
+### 📖 Описание на проекта
+Настоящият проект е свързан с темата **Computer Vision (Компютърно зрение)** и демонстрира как чрез машинно обучение може да се разпознават различни видове сложни хардуерни архитектури. 
 
-### 🤖 **AI-Based Anomaly Detection**
-- **Isolation Forest**: Detects anomalies in data using machine learning.
-- **Custom Features**: Simulated feature extraction for anomaly detection.
-
-### 🔗 **Integrated Workflow**
-- Reads sensitive data, applies obfuscation, and encrypts it.
-- Detects anomalies in encrypted/obfuscated data using an AI model.
-- Decrypts and deobfuscates the data to restore the original content.
-
-## 📂 Workflow
-1. **Input Data**: A file containing sensitive information.
-2. **Obfuscation**:
-   - Pseudonymization of sensitive text.
-   - Tokenization with encryption.
-3. **Encryption**: AES encrypts the obfuscated data.
-4. **AI Analysis**: Detects anomalies in the obfuscated/encrypted data.
-5. **Decryption and Deobfuscation**:
-   - Decrypts the AES-encrypted data.
-   - Restores original data through detokenization and reverse pseudonymization.
-
-## 📁 File Structure
-```
-|-- cryptographic_algorithms.py  # Main script for integration
-|-- sample.txt                   # Sample input file
-|-- decrypted_sample.txt         # Output after decryption and deobfuscation
-|-- aes_key.key                  # AES encryption key
-|-- private_key.pem              # RSA private key (password-protected)
-|-- public_key.pem               # RSA public key
-```
-
-## 🛠️ Requirements
-- Python 3.8+
-- Libraries:
-  - `cryptography`
-  - `pandas`
-  - `scikit-learn`
-
-Install dependencies:
-```bash
-pip install cryptography pandas scikit-learn
-```
-
-## 🚀 Usage
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/Artificial-Intelligence-Project.git
-   cd Artificial-Intelligence-Project
-   ```
-
-2. Run the main script:
-   ```bash
-   python cryptographic_algorithms.py
-   ```
-
-3. Verify the output:
-   - Check `sample.txt` and `decrypted_sample.txt` to confirm the workflow.
-
-## 🔍 Key Features in Detail
-### 🔒 Pseudonymization
-- Maps original data to UUIDs for anonymity.
-- Example:
-  ```
-  Original: Name: John Doe
-  Pseudonymized: c992ffc7-aff9-4eec-a797-5ea1adabd0e1
-  ```
-
-### 🔑 Tokenization
-- Encrypts pseudonymized data for security.
-- Example:
-  ```
-  Token: gAAAAABng...
-  ```
-
-### 🛡️ AES Encryption
-- Uses a 256-bit AES key for data encryption.
-- Securely stores the encrypted file as `sample.txt.enc`.
-
-### 🔐 RSA Key Management
-- Password-protected RSA private key stored as `private_key.pem`.
-- Public key stored as `public_key.pem`.
-
-### 🤖 Anomaly Detection
-- AI model predicts whether data is normal or anomalous.
-- Example prediction:
-  ```
-  AI Prediction: Normal
-  ```
-
-## ✅ Tests and Validation
-- The system has been tested with:
-  - Sample text data (`sample.txt`).
-  - Anomaly detection using a simulated dataset.
-- Output files are validated to match original content.
-
-## 🌟 Future Enhancements
-- Support for additional file formats (e.g., JSON, CSV).
-- Extend AI model to real network traffic datasets.
-- Add a GUI or web interface for ease of use.
-
-
-
-## 👥 Contributors
-- **Nico M** - 
-- **Geri R** - 
-
+Проектът е практическо допълнение към темата *„Квантово машинно обучение“* и цели да разграничи визуално специфичния дизайн на квантовите компютри от традиционните суперкомпютърни системи. Проектът използва изображения, за да класифицира обектите в две основни категории:
+* ⚛️ **Квантови процесори** и криогенни системи (напр. IBM Quantum);
+* 🏢 **Класически сървърни зали** и суперкомпютри (стелажи и клъстери).
 
 ---
-Thank you for exploring the **Data Obfuscation and Cybersecurity System**! 🎉
 
+### 🗂️ Dataset-a, който е използван
+В проекта е използван набор от изображения, организиран локално в директорията `computers_dataset/`. 
+
+Данните са **ръчно събрани и селектирани**, за да се гарантира високото качество на извадката. Всеки запис е изображение, поставено в съответната категория: `quantum_computer` или `classical_supercomputer`. Преди самото обучение, данните са автоматично проверени за повредени файлове и са обработени чрез библиотеката **FastAI**. Приложени са техники за преоразмеряване (`Resize(128)`) и аугментация (`Data Augmentation`), за да се подобри способността на модела да генерализира.
+
+---
+
+### 🧠 Модел(и), които са тренирани
+За решаването на задачата е използвана конволюционна невронна мрежа с архитектура **ResNet18**, реализирана чрез библиотеката **PyTorch** и обвивката **FastAI**. 
+
+Използван е методът на **Трансферно обучение (Transfer Learning)**, при който модел, предварително обучен върху милиони изображения (ImageNet), се дообучава (fine-tuning) за специфичните нужди на нашата класификация. Този подход е идеален за постигане на високи резултати при сравнително малък обем от данни. След обучението, моделът се експортира във файл `model.pkl`, готов за бъдещи прогнози върху нови снимки.
+
+---
+
+### 📊 Резултат
+След обучението моделът е оценен чрез метриката **Error Rate** (Коефициент на грешка) и резултатите са визуализирани чрез **Confusion Matrix (Матрица на грешките)**. 
+
+При изпълнението на проекта бяха получени следните резултати:
+* **Error Rate:** `0.25` 
+* **Accuracy (Точност):** `75.00%` 
+* **Recall (Квантови системи):** `100%` – Моделът безпогрешно идентифицира всички тестови изображения на квантови компютри.
+
+Матрицата на грешките показва, че специфичната геометрия на квантовите системи се разпознава отлично, докато леки неточности възникват единствено при класически системи с визуално сходно окабеляване.
+
+*(Място за вашата графика)*
+![Матрица на грешките](matrix.png)
+> 💡 *Забележка: Поставете снимката на матрицата в основната папка на проекта и се уверете, че се казва `matrix.png`.*
+
+---
+
+### 📂 Структура на проекта
+* `computers_dataset/` – папка с тренировъчните и валидационни изображения
+* `main.py` – основен скрипт за подготовка на данните, обучение и визуализация
+* `model.pkl` – записан обучен модел (генерира се след изпълнение)
+* `README.md` – описание на проекта
+
+---
+
+### 🛠️ Използвани технологии
+* **Python**
+* **FastAI** & **PyTorch** (за Deep Learning модела)
+* **Matplotlib** (за визуализация на резултатите)
+* **Pillow** (за валидация и обработка на изображения)
+
+---
+
+### 🚀 Как се стартира
+1. Инсталират се необходимите библиотеки чрез терминала:
+   ```bash
+   pip install fastai fastcore matplotlib pillow
+Уверете се, че сте поставили събраните изображения в правилните подпапки вътре в computers_dataset/.
+
+Стартира се скриптът:
+
+Bash
+python main.py
+Процесът на почистване, обучение и генериране на резултати се случва автоматично.
+
+🎯 Заключение
+Проектът показва стабилна и ефективна реализация на модел за компютърно зрение, приложен към научна и технологична тема. Той демонстрира как техниките за Откриване на знания могат да извлекат характерни визуални белези от неструктурирани данни (изображения). Моделът може лесно да бъде разширен с по-голям набор от ръчно събрани данни и по-дълбоки архитектури за постигане на индустриална точност.
