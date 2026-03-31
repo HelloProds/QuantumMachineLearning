@@ -1,52 +1,29 @@
 from fastai.vision.all import *
-from duckduckgo_search import DDGS
-from fastcore.all import *
-import time
-
-
-# 1. Функция за търсене
-def search_images(term, max_images=30):
-    print(f"Опит за търсене на '{term}'...")
-    try:
-        with DDGS() as ddgs:
-            results = list(ddgs.images(term, max_results=max_images))
-            return L(results).itemgot('image')
-    except Exception as e:
-        print(f"Търсачката отказа достъп: {e}")
-        return L()
 
 
 def run_project():
     path = Path('computers_dataset')
-    searches = {
-        'quantum_computer': 'quantum computer processor gold chandelier',
-        'classical_supercomputer': 'supercomputer server room racks'
-    }
 
-    # Сваляне на данни (ако папката не съществува или е празна)
-    if not path.exists() or len(get_image_files(path)) < 10:
-        path.mkdir(exist_ok=True)
-        for category, term in searches.items():
-            dest = (path / category)
-            dest.mkdir(exist_ok=True, parents=True)
-            urls = search_images(term)
-            if len(urls) > 0:
-                download_images(dest, urls=urls)
-                time.sleep(2)
+    # 1. Проверка дали си сложил снимките
+    if not path.exists():
+        print(f"Грешка: Папката '{path}' не съществува!")
+        print("Моля, създай я и сложи вътре папките 'quantum_computer' и 'classical_supercomputer' със снимки.")
+        return
 
-        # Проверка дали наистина има снимки
-        if len(get_image_files(path)) < 5:
-            print("\n!!! ВНИМАНИЕ: Свалянето се провали заради Ratelimit.")
-            print(f"Моля, сложи ръчно по 15-20 снимки в папките вътре в: {path.absolute()}")
-            print("След това пусни програмата отново.\n")
-            return
+    files = get_image_files(path)
+    if len(files) < 10:
+        print(f"Грешка: Намерени са твърде малко снимки ({len(files)}). Сложи поне по 15 във всяка папка.")
+        return
 
-    # Почистване
+    # 2. Почистване на евентуално повредени файлове
     print("Проверка на изображенията...")
-    failed = verify_images(get_image_files(path))
+    failed = verify_images(files)
     failed.map(Path.unlink)
+    if len(failed) > 0:
+        print(f"Изтрити са {len(failed)} невалидни файла.")
 
-    # Подготовка на DataLoaders (bs=8 е по-леко за паметта)
+    # 3. Подготовка на данните (DataLoaders)
+    print("Зареждане на данните...")
     dls = DataBlock(
         blocks=(ImageBlock, CategoryBlock),
         get_items=get_image_files,
@@ -56,21 +33,21 @@ def run_project():
         batch_tfms=aug_transforms()
     ).dataloaders(path, bs=8, num_workers=0)
 
-    # Обучение
-    print("Започва обучение на модела...")
+    # 4. Обучение на модела
+    print("Започва обучение на модела (ResNet18)...")
     learn = vision_learner(dls, resnet18, metrics=error_rate)
-
-    # Тренираме за 3 епохи
     learn.fine_tune(3)
 
-    # Резултати
-    print("Готово! Показване на резултатите...")
+    # 5. Запазване на готовия модел
+    learn.export('model.pkl')
+    print("Моделът е успешно обучен и запазен като 'model.pkl'!")
+
+    # 6. Показване на резултатите (Confusion Matrix)
+    print("Показване на матрицата на грешките...")
     interp = ClassificationInterpretation.from_learner(learn)
     interp.plot_confusion_matrix()
-    # Това ще отвори прозорец с графиката. На Windows може да трябва да го затвориш, за да продължи скрипта.
     plt.show()
 
 
-# ТОВА Е НАЙ-ВАЖНАТА ЧАСТ ЗА WINDOWS:
 if __name__ == '__main__':
     run_project()
